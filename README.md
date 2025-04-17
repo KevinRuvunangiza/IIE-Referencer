@@ -67,3 +67,4 @@
 <hr>
 
 <p style="text-align: center;">Made with ❤️ for students and lifelong learners.</p>
+<p><em>-Kevin Ruvunangiza</em></p>
