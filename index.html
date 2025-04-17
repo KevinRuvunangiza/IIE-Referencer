@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IIE - REFERENCER</title>
+  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h1>IIE STYLE REFERENCER</h1>
+    <p>Because manual referencing is so last semester.</p>
+    <h2 id="reference-type-info">Now referencing a Website</h2>
+  </header>
+
+  <div class="create-source">
+    <div class="select-wrapper">
+      <label for="reference-type">Reference Type:</label>
+      <select id="reference-type" onchange="SetReferenceType()">
+        <option value="Website">Website</option>
+        <option value="Book">Book</option>
+      </select>
+    </div>
+
+    <label for="Author">Author:</label>
+    <p id="multiple-authors-tips"><strong>To reference multiple authors, seperate each of them using a semi-colon(;)</strong></p>
+    <input type="text" id="author-input" />
+
+    <label for="Page-Name">Name of The Page / Book:</label>
+    <input type="text" id="pageName-input" />
+
+    <label for="Year">Year:</label>
+    <input type="text" id="year-input" />
+
+    <div id="month-day-container">
+        <label for="Month">Month:</label>
+        <input type="text" id="month-input" />
+    
+        <label for="Day">Day:</label>
+        <input type="text" id="day-input" />
+    </div>
+
+    <div id="book-container">
+        <label for="City">City:</label>
+        <input type="text" id="city-input">
+            <br>
+        <label for="Publisher">Publisher:</label>
+        <input type="text" id="publisher-input">
+    </div>
+   
+
+    <div id="url-container">
+      <label for="Url">URL:</label>
+      <input type="text" id="url-input" />
+    </div>
+
+    <div class="accessed-inputs">
+      <label for="Year Accessed">Year Accessed:</label>
+      <input type="text" id="year-accessed-input" />
+
+      <label for="Month Accessed">Month Accessed:</label>
+      <input type="text" id="month-accessed-input" />
+
+      <label for="Day Accessed">Day Accessed:</label>
+      <input type="text" id="day-accessed-input" />
+    </div>
+
+    <button type="button" onclick="GenerateReferenceList()">Create</button>
+  </div>
+
+  <div id="reference-list"></div>
+
+  <script src="./scripts/script.js"></script>
+
+  <footer>
+    <p>&copy; 2025 Kevin Ruvunangiza</p>
+    <p>Made with ❤️ in Vanilla JavaScript | Beta</p>
+    <p><a href="mailto:ruvunangizakev@gmail.com">📧</a> | <a href="https://github.com/yourrepo" target="_blank">GitHub</a></p>
+  </footer>
+</body>
+</html>

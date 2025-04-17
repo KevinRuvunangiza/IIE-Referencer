@@ -1,0 +1,151 @@
+:root {
+    --background: #121212;
+    --primaryText: #E0E0E0;
+    --secondaryText: #B0B0B0;
+    --accent: #4F46E5;
+    --accentHover: #6366F1;
+    --borders: #2A2A2A;
+    --inputBackground: #1E1E1E;
+    --error: #EF4444;
+  }
+  
+  body {
+    background-color: var(--background);
+    font-family: 'Open Sans', sans-serif;
+    color: var(--primaryText);
+    margin: 0;
+    padding: 2rem;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .create-source,
+  .reference-list {
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: transparent;
+  }
+  
+  label {
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+  
+  input {
+    background-color: var(--inputBackground);
+    color: var(--primaryText);
+    border: 1px solid var(--borders);
+    border-radius: 6px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accentHover);
+  }
+  
+  button {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  button:hover {
+    background-color: var(--accentHover);
+  }
+  
+  #reference {
+    background-color: var(--inputBackground);
+    padding: 1rem;
+    margin-top: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--borders);
+    color: var(--secondaryText);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  
+  .accessed-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .select-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  select {
+    background-color: var(--inputBackground);
+    color: var(--primaryText);
+    border: 1px solid var(--borders);
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+    font-size: 1rem;
+    appearance: none;
+    width: 100%;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+  }
+  
+  .select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    top: 70%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--secondaryText);
+    font-size: 0.8rem;
+  }
+
+  #multiple-authors-tips {
+    font-size: 0.75rem;              /* Slightly smaller text (12px) */
+    color: var(--secondaryText);       /* Keep your existing accent color */
+    font-style: italic;              /* Italic for a softer hint-like look */
+    margin-top: 4px;                 /* Spacing from element above */
+    display: block;                  /* Ensures it behaves like a block element */
+    opacity: 0.8;                    /* Slight transparency for subtlety */
+    line-height: 1.4;                /* Improve readability */
+  }
+  
+  footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  footer a{
+
+    font-style: none;
+    text-decoration: none;
+    color: var(--primaryText);
+  }

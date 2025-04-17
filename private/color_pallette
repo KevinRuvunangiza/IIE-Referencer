@@ -1,0 +1,11 @@
+
+Color Use	Hex	Name (for vibe)
+
+Background	#121212	Midnight Black
+Primary Text	#E0E0E0	Ash Grey
+Secondary Text	#B0B0B0	Muted Silver
+Accent (Buttons)	#4F46E5	Indigo Blue
+Accent Hover	#6366F1	Lighter Indigo
+Borders/Lines	#2A2A2A	Graphite
+Input BG	#1E1E1E	Charcoal
+Error/Alert (optional)	#EF4444	Soft Red
