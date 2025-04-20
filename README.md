@@ -57,7 +57,7 @@
 <hr>
 
 <h2>📬 Feedback</h2>
-<p>Feel free to suggest improvements or report bugs via <a href="#">GitHub Issues</a> or by emailing me at: <code>your.email@example.com</code></p>
+<p>Feel free to suggest improvements or report bugs via <a href="#">GitHub Issues</a> or by emailing me at: <code>ruvunangizakev@gmail.com</code></p>
 
 <hr>
 
