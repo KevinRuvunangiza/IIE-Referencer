@@ -1,4 +1,4 @@
-const refInfoMsg = "Now referencing a ";
+const refInfoMsg = "Now referencing ";
 
 let authorInput = document.getElementById("author-input");
 let pageNameInput = document.getElementById("pageName-input");
@@ -28,17 +28,12 @@ function SetReferenceType() {
   const monthDayContainer = document.getElementById("month-day-container");
   const bookContainer = document.getElementById("book-container");
 
-  if (type === "Website") {
-    accessedInputs.style.display = "flex";
-    urlContainer.style.display = "block";
-    monthDayContainer.style.display = "block";
-    bookContainer.style.display = "none";
-  } else {
-    accessedInputs.style.display = "none";
-    urlContainer.style.display = "none";
-    monthDayContainer.style.display = "none";
-    bookContainer.style.display = "block";
-  }
+  const needsAccessAndURL = ["Website", "PDF", "YouTube"].includes(type);
+
+  accessedInputs.style.display = needsAccessAndURL ? "flex" : "none";
+  urlContainer.style.display = needsAccessAndURL ? "block" : "none";
+  monthDayContainer.style.display = "none"; // Always hide publication month/day
+  bookContainer.style.display = (type === "Book" || type === "PDF") ? "block" : "none";
 }
 
 function GenerateReferenceList() {
@@ -47,8 +42,6 @@ function GenerateReferenceList() {
   const authorRaw = authorInput.value.trim();
   const pageName = pageNameInput.value.trim();
   const year = yearInput.value.trim();
-  const month = monthInput.value.trim();
-  const day = dayInput.value.trim();
   const url = urlInput.value.trim();
   const city = cityInput.value.trim();
   const publisher = publisherInput.value.trim();
@@ -56,22 +49,17 @@ function GenerateReferenceList() {
   const monthAccessed = monthAccInput.value.trim();
   const dayAccessed = dayAccInput.value.trim();
 
-  // Handle multiple authors with "and" for two or more
   const authorsFormatted = (() => {
     const authorArray = authorRaw.split(";").map(author => {
       const nameParts = author.trim().split(" ");
       const lastName = nameParts.pop();
-      const initials = nameParts.map(n => n.charAt(0).toUpperCase()).join(" ");
+      const initials = nameParts.map(n => n.charAt(0).toUpperCase() + ".").join(" ");
       return `${lastName}, ${initials}`;
     });
 
-    if (authorArray.length === 1) {
-      return authorArray[0];
-    } else if (authorArray.length === 2) {
-      return `${authorArray[0]} and ${authorArray[1]}`;
-    } else {
-      return authorArray.slice(0, -1).join(", ") + ", and " + authorArray[authorArray.length - 1];
-    }
+    if (authorArray.length === 1) return authorArray[0];
+    if (authorArray.length === 2) return `${authorArray[0]} and ${authorArray[1]}`;
+    return authorArray.slice(0, -1).join(", ") + ", and " + authorArray[authorArray.length - 1];
   })();
 
   let reference = "";
@@ -79,10 +67,19 @@ function GenerateReferenceList() {
 
   if (type === "Website") {
     icon = "🌐";
-    reference = `${authorsFormatted}. ${year}. ${pageName}, ${day} ${month} ${year}.\n[Online]. Available at:\n${url}\n[Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
-  } else if (type === "Book") {
+    reference = `${authorsFormatted}, ${year}. <em>${pageName}</em>. [online] Available at: &lt;${url}&gt; [Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
+  }
+  else if (type === "Book") {
     icon = "📘";
-    reference = `${authorsFormatted}. ${year}. <em>${pageName}</em>.\n${city}: ${publisher}`;
+    reference = `${authorsFormatted}, ${year}. <em>${pageName}</em>. ${city}: ${publisher}.`;
+  }
+  else if (type === "PDF") {
+    icon = "📄";
+    reference = `${authorsFormatted}, ${year}. <em>${pageName}</em> [pdf] ${city}: ${publisher}. Available at: &lt;${url}&gt; [Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
+  }
+  else if (type === "YouTube") {
+    icon = "📺";
+    reference = `${authorsFormatted}, ${year}. <em>${pageName}</em> [video online] Available at: &lt;${url}&gt; [Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
   }
 
   const genRefTxt = document.createElement("h3");
@@ -91,16 +88,15 @@ function GenerateReferenceList() {
   const referenceContainer = document.createElement("div");
   referenceContainer.id = "reference";
   referenceContainer.appendChild(genRefTxt);
-
   referenceListElement.appendChild(referenceContainer);
 
   refList.push({
     author: authorRaw,
     pageName,
     year,
-    month,
-    day,
     url,
+    city,
+    publisher,
     yearAccessed,
     monthAccessed,
     dayAccessed,
@@ -108,22 +104,13 @@ function GenerateReferenceList() {
   });
 
   // Clear inputs
-  authorInput.value = "";
-  pageNameInput.value = "";
-  yearInput.value = "";
-  monthInput.value = "";
-  dayInput.value = "";
-  urlInput.value = "";
-  yearAccInput.value = "";
-  monthAccInput.value = "";
-  dayAccInput.value = "";
-  cityInput.value = "";
-  publisherInput.value = "";
+  [
+    authorInput, pageNameInput, yearInput,
+    urlInput, yearAccInput, monthAccInput, dayAccInput,
+    cityInput, publisherInput
+  ].forEach(input => input.value = "");
 
   console.log(refList);
 }
 
-// Initialize correct fields visibility on page load
-document.addEventListener("DOMContentLoaded", () => {
-  SetReferenceType();
-});
+document.addEventListener("DOMContentLoaded", SetReferenceType);
