@@ -22,35 +22,34 @@
       <select id="reference-type" onchange="SetReferenceType()">
         <option value="Website">Website</option>
         <option value="Book">Book</option>
+        <option value="PDF">PDF Document</option>
+        <option value="YouTube">YouTube Video</option>
       </select>
     </div>
 
     <label for="Author">Author:</label>
-    <p id="multiple-authors-tips"><strong>To reference multiple authors, seperate each of them using a semi-colon(;)</strong></p>
+    <p id="multiple-authors-tips"><strong>To reference multiple authors, separate each using a semi-colon (;)</strong></p>
     <input type="text" id="author-input" />
 
-    <label for="Page-Name">Name of The Page / Book:</label>
+    <label for="Page-Name">Title / Name of The Page / Book:</label>
     <input type="text" id="pageName-input" />
 
     <label for="Year">Year:</label>
     <input type="text" id="year-input" />
 
     <div id="month-day-container">
-        <label for="Month">Month:</label>
-        <input type="text" id="month-input" />
-    
-        <label for="Day">Day:</label>
-        <input type="text" id="day-input" />
+      <label for="Month">Month:</label>
+      <input type="text" id="month-input" />
+      <label for="Day">Day:</label>
+      <input type="text" id="day-input" />
     </div>
 
     <div id="book-container">
-        <label for="City">City:</label>
-        <input type="text" id="city-input">
-            <br>
-        <label for="Publisher">Publisher:</label>
-        <input type="text" id="publisher-input">
+      <label for="City">City:</label>
+      <input type="text" id="city-input">
+      <label for="Publisher">Publisher:</label>
+      <input type="text" id="publisher-input">
     </div>
-   
 
     <div id="url-container">
       <label for="Url">URL:</label>
@@ -60,10 +59,8 @@
     <div class="accessed-inputs">
       <label for="Year Accessed">Year Accessed:</label>
       <input type="text" id="year-accessed-input" />
-
       <label for="Month Accessed">Month Accessed:</label>
       <input type="text" id="month-accessed-input" />
-
       <label for="Day Accessed">Day Accessed:</label>
       <input type="text" id="day-accessed-input" />
     </div>
@@ -73,12 +70,12 @@
 
   <div id="reference-list"></div>
 
-  <script src="scripts/script.js"></script>
-
   <footer>
     <p>&copy; 2025 Kevin Ruvunangiza</p>
     <p>Made with ❤️ in Vanilla JavaScript | Beta</p>
     <p><a href="mailto:ruvunangizakev@gmail.com">📧</a> | <a href="https://github.com/KevinRuvunangiza/IIE-Referencer" target="_blank">GitHub</a></p>
   </footer>
+
+  <script src="scripts/script.js"></script>
 </body>
 </html>
