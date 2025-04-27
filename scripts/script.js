@@ -1,6 +1,7 @@
 const refInfoMsg = "Now referencing ";
 
 let authorInput = document.getElementById("author-input");
+let orgAuthorCheckbox = document.getElementById("org-author-checkbox");
 let pageNameInput = document.getElementById("pageName-input");
 let yearInput = document.getElementById("year-input");
 let monthInput = document.getElementById("month-input");
@@ -32,7 +33,7 @@ function SetReferenceType() {
 
   accessedInputs.style.display = needsAccessAndURL ? "flex" : "none";
   urlContainer.style.display = needsAccessAndURL ? "block" : "none";
-  monthDayContainer.style.display = "none"; // Always hide publication month/day
+  monthDayContainer.style.display = "none";
   bookContainer.style.display = (type === "Book" || type === "PDF") ? "block" : "none";
 }
 
@@ -40,6 +41,7 @@ function GenerateReferenceList() {
   const type = referenceType.value;
 
   const authorRaw = authorInput.value.trim();
+  const isOrg = orgAuthorCheckbox.checked;
   const pageName = pageNameInput.value.trim();
   const year = yearInput.value.trim();
   const url = urlInput.value.trim();
@@ -50,6 +52,10 @@ function GenerateReferenceList() {
   const dayAccessed = dayAccInput.value.trim();
 
   const authorsFormatted = (() => {
+    if (isOrg || type === "PDF" || type === "YouTube") {
+      return authorRaw;
+    }
+
     const authorArray = authorRaw.split(";").map(author => {
       const nameParts = author.trim().split(" ");
       const lastName = nameParts.pop();
@@ -68,18 +74,15 @@ function GenerateReferenceList() {
   if (type === "Website") {
     icon = "🌐";
     reference = `${authorsFormatted}, ${year}. <em>${pageName}</em>. [online] Available at: &lt;${url}&gt; [Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
-  }
-  else if (type === "Book") {
+  } else if (type === "Book") {
     icon = "📘";
     reference = `${authorsFormatted}, ${year}. <em>${pageName}</em>. ${city}: ${publisher}.`;
-  }
-  else if (type === "PDF") {
+  } else if (type === "PDF") {
     icon = "📄";
-    reference = `${authorsFormatted}, ${year}. <em>${pageName}</em> [pdf] ${city}: ${publisher}. Available at: &lt;${url}&gt; [Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
-  }
-  else if (type === "YouTube") {
+    reference = `${authorsFormatted}, ${year}. <em>${pageName}</em>. [pdf] ${city}: ${publisher}.\nAvailable at:\n&lt;${url}&gt; [Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
+  } else if (type === "YouTube") {
     icon = "📺";
-    reference = `${authorsFormatted}, ${year}. <em>${pageName}</em> [video online] Available at: &lt;${url}&gt; [Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
+    reference = `${authorsFormatted}, ${year}. <em>${pageName}</em>. [video online]\nAvailable at:\n&lt;${url}&gt; [Accessed ${dayAccessed} ${monthAccessed} ${yearAccessed}].`;
   }
 
   const genRefTxt = document.createElement("h3");
@@ -92,6 +95,7 @@ function GenerateReferenceList() {
 
   refList.push({
     author: authorRaw,
+    isOrg,
     pageName,
     year,
     url,
@@ -103,12 +107,12 @@ function GenerateReferenceList() {
     type
   });
 
-  // Clear inputs
   [
     authorInput, pageNameInput, yearInput,
     urlInput, yearAccInput, monthAccInput, dayAccInput,
     cityInput, publisherInput
   ].forEach(input => input.value = "");
+  orgAuthorCheckbox.checked = false;
 
   console.log(refList);
 }
